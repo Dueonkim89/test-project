@@ -1,11 +1,20 @@
 .ui.button.globalTrash {
-  /*  background: none;*/
+  margin-right: 0.75rem;
 }
 
 .searchBar {
-  width: 40rem;
+  width: 38rem;
 }
 
 .globalContainer {
   margin-top: 0.75rem;
+}
+
+button.ui.icon.button.leftPagination {
+  margin-left: 0.75rem;
+  margin-right: 0.35rem;
+}
+
+button.ui.icon.button.rightPagination {
+  margin-right: 0.75rem;
 }
