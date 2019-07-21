@@ -18,3 +18,8 @@ button.ui.icon.button.leftPagination {
 button.ui.icon.button.rightPagination {
   margin-right: 0.75rem;
 }
+
+button.ui.button.tabs {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
