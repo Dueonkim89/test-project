@@ -11,10 +11,11 @@ export function createEmailList({ date, name, message }) {
   };
 }
 
-export function updatePagination({ start, end }) {
+export function updatePagination({ start, end, reference }) {
   return {
     type: UPDATE_PAGINATION,
     start,
-    end
+    end,
+    reference
   };
 }

@@ -11,10 +11,7 @@ function emails(state = [], action) {
     return [
       ...state,
       {
-        date: date
-          .split(" ")
-          .slice(1, 4)
-          .join(" "),
+        date,
         name,
         message
       }
@@ -31,7 +28,7 @@ function emails(state = [], action) {
 function startPagination(state = 1, action) {
   const { start } = action;
   if (action.type === UPDATE_PAGINATION) {
-    return (state += start);
+    return Math.abs((state += start));
   } else {
     return state;
   }
@@ -39,9 +36,15 @@ function startPagination(state = 1, action) {
 
 // endPagination
 function endPagination(state = 50, action) {
-  const { end } = action;
+  let { end, reference } = action;
   if (action.type === UPDATE_PAGINATION) {
-    return (state += end);
+    if (end + state > reference) {
+      return reference;
+    } else if (state === reference) {
+      return (state -= state % 50);
+    } else {
+      return Math.abs((state += end));
+    }
   } else {
     return state;
   }

@@ -1,8 +1,24 @@
 import React, { Component } from "react";
 import { Container, Button, Icon, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
+// import action creator
+import { updatePagination } from "../actions/index.js";
 
 class Header extends Component {
+  leftArrowClick = () => {
+    let { emails } = this.props;
+    this.props.dispatch(
+      updatePagination({ start: -50, end: -50, reference: emails.length })
+    );
+  };
+
+  rightArrowClick = () => {
+    let { endPagination, emails } = this.props;
+    this.props.dispatch(
+      updatePagination({ start: 50, end: 50, reference: emails.length })
+    );
+  };
+
   render() {
     console.log(this.props);
     return (
@@ -20,6 +36,7 @@ class Header extends Component {
           icon
           className="leftPagination"
           disabled={this.props.startPagination === 1}
+          onClick={this.leftArrowClick}
         >
           <Icon name="angle left" />
         </Button>
@@ -27,6 +44,7 @@ class Header extends Component {
           icon
           className="rightPagination"
           disabled={this.props.endPagination === this.props.emails.length}
+          onClick={this.rightArrowClick}
         >
           <Icon name="angle right" />
         </Button>
