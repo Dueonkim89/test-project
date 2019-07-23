@@ -3,12 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import combineReducers from "./reducers/index.js";
 
-const store = createStore(combineReducers);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(combineReducers, composeEnhancers());
 
 ReactDOM.render(
   <BrowserRouter>
