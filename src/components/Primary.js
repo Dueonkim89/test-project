@@ -19,7 +19,7 @@ class Primary extends Component {
         name={email.name}
         message={email.message}
         date={email.date}
-        key={"person" + index}
+        key={email.message}
       />
     ));
   }

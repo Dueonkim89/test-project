@@ -32,16 +32,18 @@ export function deleteEmail({ name, message, index }) {
   };
 }
 
-export function selectedEmail({ index }) {
+export function selectedEmail({ name, message }) {
   return {
     type: SELECTED_EMAIL,
-    index
+    name,
+    message
   };
 }
 
-export function deselectedEmail({ index }) {
+export function deselectedEmail({ name, message }) {
   return {
     type: DESELECTED_EMAIL,
-    index
+    name,
+    message
   };
 }

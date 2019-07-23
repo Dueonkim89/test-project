@@ -16,7 +16,7 @@ class EmailItems extends Component {
   };
 
   handleCheckboxChange = event => {
-    const { name, message, date, emails } = this.props;
+    const { name, message, emails } = this.props;
     this.setState(prevstate => ({ checked: !prevstate.checked }));
 
     let index = emails.findIndex(
@@ -24,15 +24,15 @@ class EmailItems extends Component {
     );
     this.setState({ index });
     if (!this.state.checked) {
-      this.props.dispatch(selectedEmail({ index }));
+      this.props.dispatch(selectedEmail({ name, message }));
     } else {
-      this.props.dispatch(deselectedEmail({ index }));
+      this.props.dispatch(deselectedEmail({ name, message }));
     }
   };
 
   deleteEmail = () => {
     let { name, message } = this.props;
-    this.setState({ checked: false });
+    //  this.setState({ checked: false });
     this.props.dispatch(
       deleteEmail({ name, message, index: this.state.index })
     );

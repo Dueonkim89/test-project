@@ -9,7 +9,7 @@ import {
 import { combineReducers } from "redux";
 
 function emails(state = [], action) {
-  const { date, name, message, index } = action;
+  const { date, name, message } = action;
   if (action.type === REGISTER_EMAIL_LIST) {
     return [
       ...state,
@@ -57,14 +57,14 @@ function endPagination(state = 50, action) {
 }
 
 function selectedEmails(state = [], action) {
-  let { index } = action;
+  let { name, message } = action;
   if (action.type === SELECTED_EMAIL) {
     let newState = [...state];
-    newState.push(index);
+    newState.push({ name, message });
     return newState;
   } else if (action.type === DESELECTED_EMAIL || action.type === DELETE_EMAIL) {
     let newState = [...state];
-    return newState.filter(x => x !== index);
+    return newState.filter(x => x.name !== name && x.message !== message);
   }
   return state;
 }
