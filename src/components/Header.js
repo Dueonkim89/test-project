@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Button, Icon, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 // import action creator
-import { updatePagination } from "../actions/index.js";
+import { updatePagination, deleteEmail } from "../actions/index.js";
 
 class Header extends Component {
   leftArrowClick = () => {
@@ -18,12 +18,19 @@ class Header extends Component {
       updatePagination({ start: 50, end: 50, reference: emails.length })
     );
   };
+  
+  globalDelete = () => {
+	  let { selectedEmails, dispatch } = this.props;
+	  selectedEmails.forEach(email => {
+		  dispatch(deleteEmail({name: email.name, message: email.message}));
+	  });
+  };
 
   render() {
     console.log(this.props);
     return (
       <Container textAlign="center" className="globalContainer">
-        <Button icon className="globalTrash">
+        <Button icon className="globalTrash" onClick={this.globalDelete}>
           <Icon name="trash" />
         </Button>
         <Input
