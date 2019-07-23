@@ -13,7 +13,7 @@ class Header extends Component {
   };
 
   rightArrowClick = () => {
-    let { endPagination, emails } = this.props;
+    let { emails } = this.props;
     this.props.dispatch(
       updatePagination({ start: 50, end: 50, reference: emails.length })
     );
@@ -57,8 +57,13 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ startPagination, endPagination, emails }) => {
-  return { startPagination, endPagination, emails };
+const mapStateToProps = ({
+  startPagination,
+  endPagination,
+  emails,
+  selectedEmails
+}) => {
+  return { startPagination, endPagination, emails, selectedEmails };
 };
 
 export default connect(mapStateToProps)(Header);

@@ -19,7 +19,7 @@ class Primary extends Component {
         name={email.name}
         message={email.message}
         date={email.date}
-        key={index}
+        key={"person" + index}
       />
     ));
   }
@@ -38,7 +38,6 @@ class Primary extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Container
         textAlign="left"

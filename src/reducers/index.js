@@ -1,12 +1,15 @@
 import {
   REGISTER_EMAIL_LIST,
   UPDATE_PAGINATION,
-  DELETE_EMAIL
+  DELETE_EMAIL,
+  SELECTED_EMAIL,
+  DESELECTED_EMAIL
+  //  GLOBAL_DELETE
 } from "../actions/index.js";
 import { combineReducers } from "redux";
 
 function emails(state = [], action) {
-  const { date, name, message } = action;
+  const { date, name, message, index } = action;
   if (action.type === REGISTER_EMAIL_LIST) {
     return [
       ...state,
@@ -18,7 +21,10 @@ function emails(state = [], action) {
     ];
   } else if (action.type === DELETE_EMAIL) {
     // filter out the email based on message and name.
-    console.log("to be completed");
+    let newState = [...state].filter(
+      (x, indx) => x.message !== message && x.name !== name
+    );
+    return newState;
   } else {
     return state;
   }
@@ -50,8 +56,22 @@ function endPagination(state = 50, action) {
   }
 }
 
+function selectedEmails(state = [], action) {
+  let { index } = action;
+  if (action.type === SELECTED_EMAIL) {
+    let newState = [...state];
+    newState.push(index);
+    return newState;
+  } else if (action.type === DESELECTED_EMAIL || action.type === DELETE_EMAIL) {
+    let newState = [...state];
+    return newState.filter(x => x !== index);
+  }
+  return state;
+}
+
 export default combineReducers({
   emails,
   startPagination,
-  endPagination
+  endPagination,
+  selectedEmails
 });
