@@ -11,37 +11,40 @@ import { formatDate } from "../helpers/utils.js";
 
 class Primary extends Component {
   generateEmails() {
-	const { startPagination, endPagination, emails, theKeyWord } = this.props;
-	if (theKeyWord) {
-		// check if email.name or email.message contains the string 
-		const filtered = emails.filter(email => email.name.includes(theKeyWord) || email.message.includes(theKeyWord));
-		// send to redux store
-		// if array length is 0, return message 'No messages matched your search'
-		if (filtered.length === 0) {
-			return <h2 className="emailList">No messages matched your search.</h2>;
-		} else {
-			const slicedEmails = filtered.slice(startPagination - 1, endPagination);
-			return slicedEmails.map((email, index) => (
-			  <EmailItems
-				name={email.name}
-				message={email.message}
-				date={email.date}
-				key={email.message}
-			  />
-			));		
-		}	
-	} else {
-		// loop through from startPag to endPag.
-		const slicedEmails = emails.slice(startPagination - 1, endPagination);
-		return slicedEmails.map((email, index) => (
-		  <EmailItems
-			name={email.name}
-			message={email.message}
-			date={email.date}
-			key={email.message}
-		  />
-		));		
-	}
+    const { startPagination, endPagination, emails, theKeyWord } = this.props;
+    if (theKeyWord) {
+      // check if email.name or email.message contains the string
+      const filtered = emails.filter(
+        email =>
+          email.name.includes(theKeyWord) || email.message.includes(theKeyWord)
+      );
+      // send to redux store
+      // if array length is 0, return message 'No messages matched your search'
+      if (filtered.length === 0) {
+        return <h2 className="emailList">No messages matched your search.</h2>;
+      } else {
+        const slicedEmails = filtered.slice(startPagination - 1, endPagination);
+        return slicedEmails.map((email, index) => (
+          <EmailItems
+            name={email.name}
+            message={email.message}
+            date={email.date}
+            key={email.message + email.name + index}
+          />
+        ));
+      }
+    } else {
+      // loop through from startPag to endPag.
+      const slicedEmails = emails.slice(startPagination - 1, endPagination);
+      return slicedEmails.map((email, index) => (
+        <EmailItems
+          name={email.name}
+          message={email.message}
+          date={email.date}
+          key={email.message}
+        />
+      ));
+    }
   }
 
   componentDidMount() {
@@ -72,7 +75,12 @@ class Primary extends Component {
   }
 }
 
-const mapStateToProps = ({ startPagination, endPagination, emails, theKeyWord }) => {
+const mapStateToProps = ({
+  startPagination,
+  endPagination,
+  emails,
+  theKeyWord
+}) => {
   return { startPagination, endPagination, emails, theKeyWord };
 };
 
