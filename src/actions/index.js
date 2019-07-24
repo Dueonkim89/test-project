@@ -3,7 +3,7 @@ export const UPDATE_PAGINATION = "UPDATE_PAGINATION";
 export const DELETE_EMAIL = "DELETE_EMAIL";
 export const SELECTED_EMAIL = "SELECTED_EMAIL";
 export const DESELECTED_EMAIL = "DESELECTED_EMAIL";
-//export const GLOBAL_DELETE = 'GLOBAL_DELETE';
+export const SEARCH_KEYWORD = 'SEARCH_KEYWORD';
 
 export function createEmailList({ date, name, message }) {
   return {
@@ -46,4 +46,11 @@ export function deselectedEmail({ name, message }) {
     name,
     message
   };
+}
+
+export function searchKeyword({keyword}) {
+	return {
+		type: SEARCH_KEYWORD,
+		keyword
+	}
 }

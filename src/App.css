@@ -40,3 +40,12 @@ button.ui.button.tabs {
 .emailDate {
   margin-right: 2.25rem;
 }
+
+.inputSearch {
+	display: inline;
+}
+
+.searchButton {
+	margin-right: 0rem;
+	margin-left: 1.1rem;
+}

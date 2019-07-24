@@ -3,8 +3,8 @@ import {
   UPDATE_PAGINATION,
   DELETE_EMAIL,
   SELECTED_EMAIL,
-  DESELECTED_EMAIL
-  //  GLOBAL_DELETE
+  DESELECTED_EMAIL,
+  SEARCH_KEYWORD
 } from "../actions/index.js";
 import { combineReducers } from "redux";
 
@@ -69,9 +69,18 @@ function selectedEmails(state = [], action) {
   return state;
 }
 
+function theKeyWord(state = null, action) {
+	let {keyword} = action;
+	if (action.type === SEARCH_KEYWORD) {
+		return keyword;
+	}
+	return state;
+}
+
 export default combineReducers({
   emails,
   startPagination,
   endPagination,
-  selectedEmails
+  selectedEmails,
+  theKeyWord
 });
