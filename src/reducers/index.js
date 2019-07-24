@@ -4,7 +4,8 @@ import {
   DELETE_EMAIL,
   SELECTED_EMAIL,
   DESELECTED_EMAIL,
-  SEARCH_KEYWORD
+  SEARCH_KEYWORD,
+  STARTING_PAGINATION
 } from "../actions/index.js";
 import { combineReducers } from "redux";
 
@@ -31,17 +32,18 @@ function emails(state = [], action) {
 }
 
 // startPagination
-function startPagination(state = 1, action) {
+function startPagination(state = null, action) {
   const { start } = action;
   if (action.type === UPDATE_PAGINATION) {
     return Math.abs((state += start));
-  } else {
-    return state;
+  } else if (action.type === STARTING_PAGINATION) {
+    return start;
   }
+  return state;
 }
 
 // endPagination
-function endPagination(state = 50, action) {
+function endPagination(state = null, action) {
   let { end, reference } = action;
   if (action.type === UPDATE_PAGINATION) {
     if (end + state > reference) {
@@ -51,9 +53,10 @@ function endPagination(state = 50, action) {
     } else {
       return Math.abs((state += end));
     }
-  } else {
-    return state;
+  } else if (action.type === STARTING_PAGINATION) {
+    return end;
   }
+  return state;
 }
 
 function selectedEmails(state = [], action) {
@@ -70,11 +73,11 @@ function selectedEmails(state = [], action) {
 }
 
 function theKeyWord(state = null, action) {
-	let {keyword} = action;
-	if (action.type === SEARCH_KEYWORD) {
-		return keyword;
-	}
-	return state;
+  let { keyword } = action;
+  if (action.type === SEARCH_KEYWORD) {
+    return keyword;
+  }
+  return state;
 }
 
 export default combineReducers({

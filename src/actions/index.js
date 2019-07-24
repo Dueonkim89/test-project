@@ -3,7 +3,8 @@ export const UPDATE_PAGINATION = "UPDATE_PAGINATION";
 export const DELETE_EMAIL = "DELETE_EMAIL";
 export const SELECTED_EMAIL = "SELECTED_EMAIL";
 export const DESELECTED_EMAIL = "DESELECTED_EMAIL";
-export const SEARCH_KEYWORD = 'SEARCH_KEYWORD';
+export const SEARCH_KEYWORD = "SEARCH_KEYWORD";
+export const STARTING_PAGINATION = "STARTING_PAGINATION";
 
 export function createEmailList({ date, name, message }) {
   return {
@@ -20,6 +21,14 @@ export function updatePagination({ start, end, reference }) {
     start,
     end,
     reference
+  };
+}
+
+export function startingPagination({ start, end }) {
+  return {
+    type: STARTING_PAGINATION,
+    start,
+    end
   };
 }
 
@@ -48,9 +57,9 @@ export function deselectedEmail({ name, message }) {
   };
 }
 
-export function searchKeyword({keyword}) {
-	return {
-		type: SEARCH_KEYWORD,
-		keyword
-	}
+export function searchKeyword({ keyword }) {
+  return {
+    type: SEARCH_KEYWORD,
+    keyword
+  };
 }
